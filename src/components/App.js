@@ -410,18 +410,15 @@ function App() {
                         <option value="1" className="towns" >Barachatti</option>
                     </select></div>
             )}
-            <div id="statename">
-                <div style={{ marginTop: 50 }} id="state-name">{statesnorth[0].name}</div>
+                <div style={{ marginTop: 50,display:'flex',justifyContent:'center' }} id="state-title">State</div>
+                <div  id="state-name">{statesnorth[0].name}</div>
                 <div id="state-description">{statesnorth[0].description}</div>
-            </div>
-            <div id="cityname">
+                <div style={{ marginTop: 50,display:'flex',justifyContent:'center' }} id="city-title">City</div>
                 <div style={{ marginTop: 50 }} id="city-name">{statesnorth[0].city[0].name1}</div>
                 <div id="city-description">{statesnorth[0].city[0].description1}</div>
-            </div>
-            <div id="townname">
+                <div style={{ marginTop: 50,display:'flex',justifyContent:'center' }} id="landmark-title">Town</div>
                 <div style={{ marginTop: 50 }} id="landmark-name">{statesnorth[0].city[0].landmarks[0].name2}</div>
                 <div id="landmark-description">{statesnorth[0].city[0].landmarks[0].description2}</div>
-            </div>
         </div>
     )
 }
