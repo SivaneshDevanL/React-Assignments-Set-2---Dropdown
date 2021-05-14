@@ -1,151 +1,429 @@
-import React, { useState,useReducer } from "react";
-import "./../styles/App.css";
+import React, { useState } from 'react';
+
+const statesnorth = [{
+    name: "Madhya Pradesh",
+    description: "Madhya Pradesh, a large state in central India, retains landmarks from eras throughout Indian history.",
+    city: [{
+        name1: "Indore",
+        description1: "Indore is a city in west-central India. It’s known for the 7-story Rajwada Palace and the Lal Baag Palace, which date back to Indore’s 19th-century Holkar dynasty.",
+        landmarks: [{
+            name2: "Mhow",
+            description2: "Dr. Ambedkar Nagar, commonly known as Mhow, is a cantonment in the Indore district in Madhya Pradesh state of India. It is located 23 kilometres south-west of Indore city, towards Mumbai on the old Mumbai-Agra Road.",
+        }, {
+            name2: "Dewas",
+            description2: "Dewas is a city in the Malwa region of the Indian state of Madhya Pradesh. The municipality was formerly the seat of two princely states during the British Raj, Dewas Junior state and Dewas Senior state, ruled by the Puar clan of Maratha.",
+        }]
+    }, {
+        name1: "Bhopal",
+        description1: "DBhopal is a city in the central Indian state of Madhya Pradesh. It's one of India’s greenest city. There are two main lakes, the Upper Lake and the Lower Lake.",
+        landmarks: [{
+            name2: "MANIT",
+            description2: "Maulana Azad National Institute of Technology Bhopal is a public technical university located in Bhopal, Madhya Pradesh, India. It is part of a group of publicly funded institutions in India known as National Institutes of Technology. ",
+        }, {
+            name2: "Berasia",
+            description2: "Berasia is a landmark and a nagar palika in Bhopal district in the state of Madhya Pradesh, India. ",
+        }]
+    }]
+}, {
+    name: "Bihar",
+    description: "Bihar is a state in East India, bordering Nepal. It is divided by the River Ganges, which floods its fertile plains. Important Buddhist pilgrimage sites include the Bodhi Tree in Bodhgaya's Mahabodhi Temple, under which the Buddha allegedly meditated.",
+    city: [{
+        name1: "Patna",
+        description1: "Patna is an ancient city that sprawls along the south bank of the Ganges River in Bihar, northeast India.",
+        landmarks: [{
+            name2: "Sonpur",
+            description2: "Sonpur is a city and sub-division in the Indian state of Bihar, situated on the banks of the River Gandak and Ganges River in the Saran District.",
+        }, {
+            name2: "Maner",
+            description2: "Maner also spelled Maner or Maner Sharif, is a satellite landmark in Patna Metropolitan Region, in the Patna district in the Indian state of Bihar. Maner Sharif lies 24 km west of Patna the capital of Bihar on National Highway 30.",
+        }]
+    }, {
+        name1: "Gaya",
+        description1: "Gaya is a holy city beside the Falgu River, in the northeast Indian state of Bihar. It’s known for 18th-century Vishnupad Mandir, a riverside temple with an octagonal shrine. Close by, ancient Mangla Gauri Temple is set on a hilltop. ",
+        landmarks: [{
+            name2: "Bakraur",
+            description2: "Bakraur, sometimes called Bakrour, is a village located slightly east of Bodh Gaya in the state of Bihar, India. It lies directly across the Phalgu River from the landmark of Bodh Gaya, where Gautama Buddha is said to have attained enlightenment.",
+        }, {
+            name2: "Barachatti",
+            description2: "Barachatti is a block in the Gaya district of Bihar, India. Barachatti contains 141 villages and 13 gram panchayat. Sarwan bazar is the biggest and Nimi is the smallest village of Barachatti. The total population in Barachatti sub-district is 142,534 according to the census during 2011 by Indian Government.",
+        }]
+    }]
+}]
 
 
-const states = [{
-	name : "Madhya Pradesh",
-	description:"Madhya Pradesh, a large state in central India, retains landmarks from eras throughout Indian history.",
-	city :[{
-		name : "Indore",
-		description:"Indore is a city in west-central India. It’s known for the 7-story Rajwada Palace and the Lal Baag Palace, which date back to Indore’s 19th-century Holkar dynasty.",
-		landmarks :[{
-			name : "Mhow",
-			description:"Dr. Ambedkar Nagar, commonly known as Mhow, is a cantonment in the Indore district in Madhya Pradesh state of India. It is located 23 kilometres south-west of Indore city, towards Mumbai on the old Mumbai-Agra Road.",				
-		},{
-			name : "Dewas",
-			description:"Dewas is a city in the Malwa region of the Indian state of Madhya Pradesh. The municipality was formerly the seat of two princely states during the British Raj, Dewas Junior state and Dewas Senior state, ruled by the Puar clan of Maratha.",
-		}]
-	},{
-		name : "Bhopal",
-		description:"DBhopal is a city in the central Indian state of Madhya Pradesh. It's one of India’s greenest city. There are two main lakes, the Upper Lake and the Lower Lake.",
-		landmarks :[{
-			name : "MANIT",
-			description:"Maulana Azad National Institute of Technology Bhopal is a public technical university located in Bhopal, Madhya Pradesh, India. It is part of a group of publicly funded institutions in India known as National Institutes of Technology. ",
-		},{
-			name: "Berasia",
-			description:"Berasia is a landmark and a nagar palika in Bhopal district in the state of Madhya Pradesh, India. ",
-		}]
-	},{
-		name : "Gwalior",
-		description:"Gwalior is a city in the central Indian state of Madhya Pradesh. It's known for its palaces and temples, including the Sas Bahu Ka Mandir intricately carved Hindu temple. ",
-		landmarks :[{
-			name : "Ajaypur",
-			description:"Little less known city Ajaypur.",
-		}]
-	}]
-},{
-	name : "Jharkhand",
-	description:"Jharkhand is a state in eastern India. It's known for its waterfalls, the elegant Jain temples of Parasnath Hill and the elephants and tigers of Betla National Park.",
-	city :[{
-		name : "Dhanbad",
-		description:"Dhanbad is the second-most populated city in the Indian state of Jharkhand. It ranks as the 33rd largest city in India and is the 42nd largest million-plus urban agglomeration in India. It is the 96th fastest growing urban area of the world by the City Mayors Foundation.",
-		landmarks :[{
-			name : "IIT(ISM) Dhanbad",
-			description:"Indian Institute of Technology (Indian School of Mines) Dhanbad is a public technical and research university located in Dhanbad, India. It is an Institute of National Importance. IIT has 18 academic departments covering Engineering,",
-		},{
-			name : "Hirapur",
-			description:"Hirapur is a census landmark in Balaghat district in the Indian state of Madhya Pradesh.",
-		}]
-	},{
-		name : "Wasseypur",
-		description:"Wasseypur is a neighbourhood in the city of Dhanbad in Dhanbad Sadar subdivision of Dhanbad district in the state of Jharkhand in India. ",
-		landmarks :[{
-			name : "Pandey muhalla",
-			description:"Located behind the dhanbad junction is must visit place.",
-		},{
-			name : "MPI Hall",
-			description:"Space for everyone",
-		}]
-	},{
-		name : "Hazaribagh",
-		description:"Hazaribagh is a city and a municipal corporation in Hazaribagh district in the Indian state of Jharkhand. It is the divisional headquarters of North Chotanagpur division.",
-		landmarks :[{
-			name : "Shaheed Nirmal Mahto Park",
-			description:"Famous for its giant dinosaur structure",
-		},{
-			name : "Gandhi Maidan",
-			description:"Ideal for conduction major events",
-		}]
-	}]
-},{
-	name : "Assam",
-	description:"Assam is a state in northeastern India known for its wildlife, archeological sites and tea plantations. ",
-	city :[{
-		name : "Guwhati",
-		description:"Guwahati is a sprawling city beside the Brahmaputra River in the northeast Indian state of Assam. It’s known for holy sites like the hilltop Kamakhya Temple,",
-		landmarks :[{
-			name : "Ganesh Guri",
-			description:"Famous because of PVR city center.",
-		},{
-			name : "Kalyani Nagar",
-			description:"located near famous Lakshmi Nagar",
-		}]
-	},{
-		name : "dimapur",
-		description:"Dimapur is a city in Nagaland, India. It is the most populous city of Nagaland and also the most densely populated city in the state with an estimated population of about 250,000.",
-		landmarks :[{
-			name : "City Tower",
-			description:"Giant Tower standing by the road since history.",
-		},{
-			name : "Sunday Market",
-			description:"Famous for its weekend Sale on all items.",
-		}]
-	},{
-		name : "Tezpur",
-		description:"Tezpur is a landmark and urban agglomeration in Sonitpur district, Assam state, India. Tezpur is located on the banks of the river Brahmaputra, 175 kilometres northeast of Guwahati, and is the largest of the north bank landmarks with a population exceeding 100,000 as per Metropolitan Census 2011.",
-		landmarks :[{
-			name : "Bamuni Hills",
-			description:"Best location for photoshoots",
-		},{
-			name : "Bhujkhowa Bazar",
-			description:"Central Market for Tezpur",
-		}]
-	}]
-},{
-	name : "Bihar",
-	description:"Bihar is a state in East India, bordering Nepal. It is divided by the River Ganges, which floods its fertile plains. Important Buddhist pilgrimage sites include the Bodhi Tree in Bodhgaya's Mahabodhi Temple, under which the Buddha allegedly meditated.",
-	city :[{
-		name : "Patna",
-		description:"Patna is an ancient city that sprawls along the south bank of the Ganges River in Bihar, northeast India.",
-		landmarks :[{
-			name : "Sonpur",
-			description:"Sonpur is a city and sub-division in the Indian state of Bihar, situated on the banks of the River Gandak and Ganges River in the Saran District.",
-		},{
-			name : "Maner",
-			description:"Maner also spelled Maner or Maner Sharif, is a satellite landmark in Patna Metropolitan Region, in the Patna district in the Indian state of Bihar. Maner Sharif lies 24 km west of Patna the capital of Bihar on National Highway 30.",
-		}]
-	},{
-		name : "Gaya",
-		description:"Gaya is a holy city beside the Falgu River, in the northeast Indian state of Bihar. It’s known for 18th-century Vishnupad Mandir, a riverside temple with an octagonal shrine. Close by, ancient Mangla Gauri Temple is set on a hilltop. ",
-		landmarks :[{
-			name : "Bakraur",
-			description:"Bakraur, sometimes called Bakrour, is a village located slightly east of Bodh Gaya in the state of Bihar, India. It lies directly across the Phalgu River from the landmark of Bodh Gaya, where Gautama Buddha is said to have attained enlightenment.",
-		},{
-			name : "Barachatti",
-			description:"Barachatti is a block in the Gaya district of Bihar, India. Barachatti contains 141 villages and 13 gram panchayat. Sarwan bazar is the biggest and Nimi is the smallest village of Barachatti. The total population in Barachatti sub-district is 142,534 according to the census during 2011 by Indian Government.",
-		}]	
-	},{
-		name : "Darbhanga",
-		description:"Darbhanga is a city and Municipal Corporation in the Indian state of Bihar. It is the 6th largest city of Bihar, only after Patna, Gaya, Bhagalpur, Muzaffarpur and Purnea. It is the headquarters of Darbhanga district and Darbhanga division and was the seat of the Raj Darbhanga and capital of the Mithila region.",
-		landmarks :[{
-			name : "Singhwara",
-			description:"Famous for its Groundnut Market",
-		},{
-			name : "Jale",
-			description:"Famous for its roasted seads market.",
-		}]
-	}]
-}];
-
-
-function App() 
-{
-	// Do not alter/remove main div
-	return (
-	<div id="main">
-		
-	</div>
-	);
+function App() {
+    const [state, setState] = useState("mp")
+    const [city, setCity] = useState("ind");
+    function check() {
+        // console.log(1)
+        const stateopt = document.getElementsByClassName("states")
+        for (let i = 0; i < stateopt.length; i++) {
+            if (stateopt[i].selected) {
+                //console.log(stateopt[i].value)
+                if (stateopt[i].value == 0) {
+                    setState("mp")
+                    setCity("ind")
+                    const { name, description, city } = statesnorth[i]
+                    const data = document.getElementById("state-name")
+                    data.innerHTML = ""
+                    const des = document.getElementById("state-description")
+                    des.innerHTML = ""
+                    const data1 = document.createElement("div")
+                    const des1 = document.createElement("div")
+                    data1.innerHTML = `${name}`
+                    des1.innerHTML = `${description}`
+                    data.appendChild(data1)
+                    des.appendChild(des1)
+                    const { name1, description1, landmarks } = statesnorth[i].city[0]
+                    const data2 = document.getElementById("city-name")
+                    data2.innerHTML = ""
+                    const des2 = document.getElementById("city-description")
+                    des2.innerHTML = ""
+                    const data3 = document.createElement("div")
+                    const des3 = document.createElement("div")
+                    data3.innerHTML = `${name1}`
+                    des3.innerHTML = `${description1}`
+                    data2.appendChild(data3)
+                    des2.appendChild(des3)
+                    const { name2, description2 } = statesnorth[i].city[0].landmarks[0]
+                    const data4 = document.getElementById("landmark-name")
+                    data4.innerHTML = ""
+                    const des4 = document.getElementById("landmark-description")
+                    des4.innerHTML = ""
+                    const data5 = document.createElement("div")
+                    const des5 = document.createElement("div")
+                    data5.innerHTML = `${name2}`
+                    des5.innerHTML = `${description2}`
+                    data4.appendChild(data5)
+                    des4.appendChild(des5)
+                }
+                else {
+                    setState("tn")
+                    setCity("cn")
+                    const { name, description, city } = statesnorth[i]
+                    const data = document.getElementById("state-name")
+                    data.innerHTML = ""
+                    const des = document.getElementById("state-description")
+                    des.innerHTML = ""
+                    const data1 = document.createElement("div")
+                    const des1 = document.createElement("div")
+                    data1.innerHTML = `${name}`
+                    des1.innerHTML = `${description}`
+                    data.appendChild(data1)
+                    des.appendChild(des1)
+                    const { name1, description1, landmarks } = statesnorth[i].city[0]
+                    const data2 = document.getElementById("city-name")
+                    data2.innerHTML = ""
+                    const des2 = document.getElementById("city-description")
+                    des2.innerHTML = ""
+                    const data3 = document.createElement("div")
+                    const des3 = document.createElement("div")
+                    data3.innerHTML = `${name1}`
+                    des3.innerHTML = `${description1}`
+                    data2.appendChild(data3)
+                    des2.appendChild(des3)
+                    const { name2, description2 } = statesnorth[i].city[0].landmarks[0]
+                    const data4 = document.getElementById("landmark-name")
+                    data4.innerHTML = ""
+                    const des4 = document.getElementById("landmark-description")
+                    des4.innerHTML = ""
+                    const data5 = document.createElement("div")
+                    const des5 = document.createElement("div")
+                    data5.innerHTML = `${name2}`
+                    des5.innerHTML = `${description2}`
+                    data4.appendChild(data5)
+                    des4.appendChild(des5)
+                }
+            }
+        }
+    }
+    function checkcity(k) {
+        const cityopt = document.getElementsByClassName("cities")
+        for (let i = 0; i < cityopt.length; i++) {
+            if (cityopt[i].selected) {
+                if (k == 0 && cityopt[i].value == 0) {
+                    setCity("ind")
+                    const { name1, description1, landmarks } = statesnorth[k].city[i]
+                    const data = document.getElementById("city-name")
+                    data.innerHTML = ""
+                    const des = document.getElementById("city-description")
+                    des.innerHTML = ""
+                    const data1 = document.createElement("div")
+                    const des1 = document.createElement("div")
+                    data1.innerHTML = `${name1}`
+                    des1.innerHTML = `${description1}`
+                    data.appendChild(data1)
+                    des.appendChild(des1)
+                    const { name2, description2 } = statesnorth[k].city[i].landmarks[0]
+                    const data2 = document.getElementById("landmark-name")
+                    data2.innerHTML = ""
+                    const des2 = document.getElementById("landmark-description")
+                    des2.innerHTML = ""
+                    const data3 = document.createElement("div")
+                    const des3 = document.createElement("div")
+                    data3.innerHTML = `${name2}`
+                    des3.innerHTML = `${description2}`
+                    data2.appendChild(data3)
+                    des2.appendChild(des3)
+                }
+                else if (k == 0 && cityopt[i].value == 1) {
+                    setCity("bop")
+                    const { name1, description1, landmarks } = statesnorth[k].city[i]
+                    const data = document.getElementById("city-name")
+                    data.innerHTML = ""
+                    const des = document.getElementById("city-description")
+                    des.innerHTML = ""
+                    const data1 = document.createElement("div")
+                    const des1 = document.createElement("div")
+                    data1.innerHTML = `${name1}`
+                    des1.innerHTML = `${description1}`
+                    data.appendChild(data1)
+                    des.appendChild(des1)
+                    const { name2, description2 } = statesnorth[k].city[i].landmarks[0]
+                    const data2 = document.getElementById("landmark-name")
+                    data2.innerHTML = ""
+                    const des2 = document.getElementById("landmark-description")
+                    des2.innerHTML = ""
+                    const data3 = document.createElement("div")
+                    const des3 = document.createElement("div")
+                    data3.innerHTML = `${name2}`
+                    des3.innerHTML = `${description2}`
+                    data2.appendChild(data3)
+                    des2.appendChild(des3)
+                }
+                else if (k == 1 && cityopt[i].value == 0) {
+                    setCity("cn")
+                    const { name1, description1, landmarks } = statesnorth[k].city[i]
+                    const data = document.getElementById("city-name")
+                    data.innerHTML = ""
+                    const des = document.getElementById("city-description")
+                    des.innerHTML = ""
+                    const data1 = document.createElement("div")
+                    const des1 = document.createElement("div")
+                    data1.innerHTML = `${name1}`
+                    des1.innerHTML = `${description1}`
+                    data.appendChild(data1)
+                    des.appendChild(des1)
+                    const { name2, description2 } = statesnorth[k].city[i].landmarks[0]
+                    const data2 = document.getElementById("landmark-name")
+                    data2.innerHTML = ""
+                    const des2 = document.getElementById("landmark-description")
+                    des2.innerHTML = ""
+                    const data3 = document.createElement("div")
+                    const des3 = document.createElement("div")
+                    data3.innerHTML = `${name2}`
+                    des3.innerHTML = `${description2}`
+                    data2.appendChild(data3)
+                    des2.appendChild(des3)
+                }
+                else {
+                    setCity("ty")
+                    const { name1, description1, landmarks } = statesnorth[k].city[i]
+                    const data = document.getElementById("city-name")
+                    data.innerHTML = ""
+                    const des = document.getElementById("city-description")
+                    des.innerHTML = ""
+                    const data1 = document.createElement("div")
+                    const des1 = document.createElement("div")
+                    data1.innerHTML = `${name1}`
+                    des1.innerHTML = `${description1}`
+                    data.appendChild(data1)
+                    des.appendChild(des1)
+                    const { name2, description2 } = statesnorth[k].city[i].landmarks[0]
+                    const data2 = document.getElementById("landmark-name")
+                    data2.innerHTML = ""
+                    const des2 = document.getElementById("landmark-description")
+                    des2.innerHTML = ""
+                    const data3 = document.createElement("div")
+                    const des3 = document.createElement("div")
+                    data3.innerHTML = `${name2}`
+                    des3.innerHTML = `${description2}`
+                    data2.appendChild(data3)
+                    des2.appendChild(des3)
+                }
+            }
+        }
+    }
+    function checktown(k, l) {
+        const townopt = document.getElementsByClassName("towns")
+        for (let i = 0; i < townopt.length; i++) {
+            if (townopt[i].selected) {
+                if (k == 0 && l == 0 && townopt[i].value == 0) {
+                    const { name2, description2 } = statesnorth[k].city[l].landmarks[i]
+                    const data = document.getElementById("landmark-name")
+                    data.innerHTML = ""
+                    const des = document.getElementById("landmark-description")
+                    des.innerHTML = ""
+                    const data1 = document.createElement("div")
+                    const des1 = document.createElement("div")
+                    data1.innerHTML = `${name2}`
+                    des1.innerHTML = `${description2}`
+                    data.appendChild(data1)
+                    des.appendChild(des1)
+                }
+                else if (k == 0 && l == 0 && townopt[i].value == 1) {
+                    const { name2, description2 } = statesnorth[k].city[l].landmarks[i]
+                    const data = document.getElementById("landmark-name")
+                    data.innerHTML = ""
+                    const des = document.getElementById("landmark-description")
+                    des.innerHTML = ""
+                    const data1 = document.createElement("div")
+                    const des1 = document.createElement("div")
+                    data1.innerHTML = `${name2}`
+                    des1.innerHTML = `${description2}`
+                    data.appendChild(data1)
+                    des.appendChild(des1)
+                }
+                else if (k == 0 && l == 1 && townopt[i].value == 0) {
+                    const { name2, description2 } = statesnorth[k].city[l].landmarks[i]
+                    const data = document.getElementById("landmark-name")
+                    data.innerHTML = ""
+                    const des = document.getElementById("landmark-description")
+                    des.innerHTML = ""
+                    const data1 = document.createElement("div")
+                    const des1 = document.createElement("div")
+                    data1.innerHTML = `${name2}`
+                    des1.innerHTML = `${description2}`
+                    data.appendChild(data1)
+                    des.appendChild(des1)
+                }
+                else if (k == 0 && l == 1 && townopt[i].value == 1) {
+                    const { name2, description2 } = statesnorth[k].city[l].landmarks[i]
+                    const data = document.getElementById("landmark-name")
+                    data.innerHTML = ""
+                    const des = document.getElementById("landmark-description")
+                    des.innerHTML = ""
+                    const data1 = document.createElement("div")
+                    const des1 = document.createElement("div")
+                    data1.innerHTML = `${name2}`
+                    des1.innerHTML = `${description2}`
+                    data.appendChild(data1)
+                    des.appendChild(des1)
+                }
+                else if (k == 1 && l == 0 && townopt[i].value == 0) {
+                    const { name2, description2 } = statesnorth[k].city[l].landmarks[i]
+                    const data = document.getElementById("landmark-name")
+                    data.innerHTML = ""
+                    const des = document.getElementById("landmark-description")
+                    des.innerHTML = ""
+                    const data1 = document.createElement("div")
+                    const des1 = document.createElement("div")
+                    data1.innerHTML = `${name2}`
+                    des1.innerHTML = `${description2}`
+                    data.appendChild(data1)
+                    des.appendChild(des1)
+                }
+                else if (k == 1 && l == 0 && townopt[i].value == 1) {
+                    const { name2, description2 } = statesnorth[k].city[l].landmarks[i]
+                    const data = document.getElementById("landmark-name")
+                    data.innerHTML = ""
+                    const des = document.getElementById("landmark-description")
+                    des.innerHTML = ""
+                    const data1 = document.createElement("div")
+                    const des1 = document.createElement("div")
+                    data1.innerHTML = `${name2}`
+                    des1.innerHTML = `${description2}`
+                    data.appendChild(data1)
+                    des.appendChild(des1)
+                }
+                else if (k == 1 && l == 1 && townopt[i].value == 0) {
+                    const { name2, description2 } = statesnorth[k].city[l].landmarks[i]
+                    const data = document.getElementById("landmark-name")
+                    data.innerHTML = ""
+                    const des = document.getElementById("landmark-description")
+                    des.innerHTML = ""
+                    const data1 = document.createElement("div")
+                    const des1 = document.createElement("div")
+                    data1.innerHTML = `${name2}`
+                    des1.innerHTML = `${description2}`
+                    data.appendChild(data1)
+                    des.appendChild(des1)
+                }
+                else {
+                    const { name2, description2 } = statesnorth[k].city[l].landmarks[i]
+                    const data = document.getElementById("landmark-name")
+                    data.innerHTML = ""
+                    const des = document.getElementById("landmark-description")
+                    des.innerHTML = ""
+                    const data1 = document.createElement("div")
+                    const des1 = document.createElement("div")
+                    data1.innerHTML = `${name2}`
+                    des1.innerHTML = `${description2}`
+                    data.appendChild(data1)
+                    des.appendChild(des1)
+                }
+            }
+        }
+    }
+    return (
+        <div>
+            <label >States:</label>
+            <select id="state" name="states" onChange={check}>
+                <option value="0" className="states"  >Madhya Pradesh</option>
+                <option value="1" className="states" >Bihar</option>
+            </select>
+            {state === "mp" && (
+                <div>
+                    <label >Cities:</label>
+                    <select id="city" name="cities" onChange={() => checkcity(0)}>
+                        <option value="0" className="cities" >Indore</option>
+                        <option value="1" className="cities" >Bhopal</option>
+                    </select></div>
+            )}
+            {state === "tn" && (
+                <div>
+                    <label >Cities:</label>
+                    <select id="city" name="cities" onChange={() => checkcity(1)}>
+                        <option value="0" className="cities" >Patna</option>
+                        <option value="1" className="cities" >Gaya</option>
+                    </select></div>
+            )}
+            {city === "ind" && (
+                <div>
+                    <label >Towns:</label>
+                    <select id="landmark" name="towns" onChange={() => checktown(0, 0)}>
+                        <option value="0" className="towns" >Mhow</option>
+                        <option value="1" className="towns" >Dewas</option>
+                    </select></div>
+            )}
+            {city === "bop" && (
+                <div>
+                    <label >Towns:</label>
+                    <select id="landmark" name="towns" onChange={() => checktown(0, 1)}>
+                        <option value="0" className="towns" >MANIT</option>
+                        <option value="1" className="towns" >Berasia</option>
+                    </select></div>
+            )}
+            {city === "cn" && (
+                <div>
+                    <label >Towns:</label>
+                    <select id="landmark" name="towns" onChange={() => checktown(1, 0)}>
+                        <option value="0" className="towns" >Sonpur</option>
+                        <option value="1" className="towns" >Maner</option>
+                    </select></div>
+            )}
+            {city === "ty" && (
+                <div>
+                    <label >Towns:</label>
+                    <select id="landmark" name="towns" onChange={() => checktown(1, 1)}>
+                        <option value="0" className="towns" >Bakraur</option>
+                        <option value="1" className="towns" >Barachatti</option>
+                    </select></div>
+            )}
+            <div id="statename">
+                <div style={{ marginTop: 50 }} id="state-name">{statesnorth[0].name}</div>
+                <div id="state-description">{statesnorth[0].description}</div>
+            </div>
+            <div id="cityname">
+                <div style={{ marginTop: 50 }} id="city-name">{statesnorth[0].city[0].name1}</div>
+                <div id="city-description">{statesnorth[0].city[0].description1}</div>
+            </div>
+            <div id="townname">
+                <div style={{ marginTop: 50 }} id="landmark-name">{statesnorth[0].city[0].landmarks[0].name2}</div>
+                <div id="landmark-description">{statesnorth[0].city[0].landmarks[0].description2}</div>
+            </div>
+        </div>
+    )
 }
 
 
