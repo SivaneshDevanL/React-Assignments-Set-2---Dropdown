@@ -359,14 +359,14 @@ function App() {
         <div>
             <label >States:</label>
             <select id="state" name="states" onChange={check}>
-                <option value="0" className="states"  >Madhya Pradesh</option>
+                <option value="0" className="states"  selected>Madhya Pradesh</option>
                 <option value="1" className="states" >Bihar</option>
             </select>
             {state === "mp" && (
                 <div>
                     <label >Cities:</label>
                     <select id="city" name="cities" onChange={() => checkcity(0)}>
-                        <option value="0" className="cities" >Indore</option>
+                        <option value="0" className="cities" selected>Indore</option>
                         <option value="1" className="cities" >Bhopal</option>
                     </select></div>
             )}
@@ -374,7 +374,7 @@ function App() {
                 <div>
                     <label >Cities:</label>
                     <select id="city" name="cities" onChange={() => checkcity(1)}>
-                        <option value="0" className="cities" >Patna</option>
+                        <option value="0" className="cities" selected>Patna</option>
                         <option value="1" className="cities" >Gaya</option>
                     </select></div>
             )}
@@ -382,7 +382,7 @@ function App() {
                 <div>
                     <label >Towns:</label>
                     <select id="landmark" name="towns" onChange={() => checktown(0, 0)}>
-                        <option value="0" className="towns" >Mhow</option>
+                        <option value="0" className="towns" selected>Mhow</option>
                         <option value="1" className="towns" >Dewas</option>
                     </select></div>
             )}
@@ -390,7 +390,7 @@ function App() {
                 <div>
                     <label >Towns:</label>
                     <select id="landmark" name="towns" onChange={() => checktown(0, 1)}>
-                        <option value="0" className="towns" >MANIT</option>
+                        <option value="0" className="towns" selected>MANIT</option>
                         <option value="1" className="towns" >Berasia</option>
                     </select></div>
             )}
@@ -398,7 +398,7 @@ function App() {
                 <div>
                     <label >Towns:</label>
                     <select id="landmark" name="towns" onChange={() => checktown(1, 0)}>
-                        <option value="0" className="towns" >Sonpur</option>
+                        <option value="0" className="towns" selected>Sonpur</option>
                         <option value="1" className="towns" >Maner</option>
                     </select></div>
             )}
@@ -406,7 +406,7 @@ function App() {
                 <div>
                     <label >Towns:</label>
                     <select id="landmark" name="towns" onChange={() => checktown(1, 1)}>
-                        <option value="0" className="towns" >Bakraur</option>
+                        <option value="0" className="towns" selected>Bakraur</option>
                         <option value="1" className="towns" >Barachatti</option>
                     </select></div>
             )}
