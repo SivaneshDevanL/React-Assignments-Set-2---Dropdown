@@ -410,14 +410,14 @@ function App() {
                         <option value="1" className="towns" >Barachatti</option>
                     </select></div>
             )}
-                <div style={{ marginTop: 50,display:'flex',justifyContent:'center' }} id="state-title">State</div>
+                <div style={{ marginTop: 50,fontSize:30,fontWeight:'20px' }} id="state-title">State</div>
                 <div  id="state-name">{statesnorth[0].name}</div>
                 <div id="state-description">{statesnorth[0].description}</div>
-                <div style={{ marginTop: 50,display:'flex',justifyContent:'center' }} id="city-title">City</div>
-                <div style={{ marginTop: 50 }} id="city-name">{statesnorth[0].city[0].name1}</div>
+                <div style={{ marginTop: 50,fontSize:30,fontWeight:'20px' }} id="city-title">City</div>
+                <div  id="city-name">{statesnorth[0].city[0].name1}</div>
                 <div id="city-description">{statesnorth[0].city[0].description1}</div>
-                <div style={{ marginTop: 50,display:'flex',justifyContent:'center' }} id="landmark-title">Town</div>
-                <div style={{ marginTop: 50 }} id="landmark-name">{statesnorth[0].city[0].landmarks[0].name2}</div>
+                <div style={{ marginTop: 50,fontSize:30,fontWeight:'20px'}} id="landmark-title">Town</div>
+                <div  id="landmark-name">{statesnorth[0].city[0].landmarks[0].name2}</div>
                 <div id="landmark-description">{statesnorth[0].city[0].landmarks[0].description2}</div>
         </div>
     )
