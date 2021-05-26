@@ -1,4 +1,4 @@
-import React, { useState,useReducer } from "react";
+import React, { useState } from "react";
 
 
 const states = [{
@@ -136,136 +136,56 @@ const states = [{
 	}]
 }];
 
-function App() 
-{
-	const[state,setState]=useState(0)
-	const[cityy,setCityy]=useState(0)
-	function check(){
-		const statei=document.getElementsByClassName("states")
-		for(let i=0;i<statei.length;i++){
-			if(statei[i].selected){
-				setState(i)
-				setCityy(0)
-				const citii=document.getElementsByClassName("cities")
-				const{name,description,city}=states[i]
-				for(let j=0;j<citii.length;j++){
-					citii[j].innerText=city[j].name
-				}
-				citii[0].selected=true
-				const town=document.getElementsByClassName("towns")
-					while(town.length!=0){
-						town[0].remove()
-					}
-				const {landmarks}=states[i].city[0]
-				const town1=document.getElementById("landmark")
-				if(states[i].city[0].landmarks.length==2){
-					const town2=document.createElement("option")
-					town2.className="towns"
-					town2.selected=true
-					town2.value=0
-					town2.innerText=landmarks[0].name
-					const town3=document.createElement("option")
-					town3.className="towns"
-					town3.value=1
-					town3.innerText=landmarks[1].name
-					town1.appendChild(town2)
-					town1.appendChild(town3)
-				}
-				else{
-					const town2=document.createElement("option")
-					town2.className="towns"
-					town2.selected=true
-					town2.value=0
-					town2.innerText=landmarks[0].name
-					town1.appendChild(town2)
-				}
-				document.getElementById("state-name").innerText=states[i].name
-				document.getElementById("state-description").innerText=states[i].description	
-				document.getElementById("city-name").innerText=states[i].city[0].name
-				document.getElementById("city-description").innerText=states[i].city[0].description	
-				document.getElementById("landmark-name").innerText=states[i].city[0].landmarks[0].name
-				document.getElementById("landmark-description").innerText=states[i].city[0].landmarks[0].description				
-			}
-		}
-	}
-	function checkcity(){
-		const citii=document.getElementsByClassName("cities")
-		for(let i=0;i<citii.length;i++){
-			if(citii[i].selected){
-				setCityy(i)
-				const town=document.getElementsByClassName("towns")
-				while(town.length!=0)
-				town[0].remove()
-				const {name,description,landmarks}=states[state].city[i]
-				const town1=document.getElementById("landmark")
-				if(states[state].city[i].landmarks.length==2){
-					const town2=document.createElement("option")
-					town2.className="towns"
-					town2.selected=true
-					town2.value=0
-					town2.innerText=landmarks[0].name
-					const town3=document.createElement("option")
-					town3.className="towns"
-					town3.value=1
-					town3.innerText=landmarks[1].name
-					town1.appendChild(town2)
-					town1.appendChild(town3)
-				}
-				else{
-					const town2=document.createElement("option")
-					town2.className="towns"
-					town2.selected=true
-					town2.value=0
-					town2.innerText=landmarks[0].name
-					town1.appendChild(town2)
-				}
-				document.getElementById("city-name").innerText=states[state].city[i].name
-				document.getElementById("city-description").innerText=states[state].city[i].description	
-				document.getElementById("landmark-name").innerText=states[state].city[i].landmarks[0].name
-				document.getElementById("landmark-description").innerText=states[state].city[i].landmarks[0].description				
-			}
-		}
-	}
-	function checktown(){
-		const town=document.getElementsByClassName("towns")
-		for(let i=0;i<town.length;i++){
-			if(town[i].selected){
-				document.getElementById("landmark-name").innerText=states[state].city[cityy].landmarks[i].name
-				document.getElementById("landmark-description").innerText=states[state].city[cityy].landmarks[i].description				
-			}
-		}
-	}
-	return (
-	<div id="main">
-		            <label >States:</label>
-            <select id="state"  onChange={check}>
-                <option value="0" className="states"  selected>{states[0].name}</option>
-                <option value="1" className="states" >{states[1].name}</option>
-				<option value="2" className="states" >{states[2].name}</option>
-                <option value="3" className="states" >{states[3].name}</option>
+export default function App(){
+    const[state,setState]=useState(0)
+    const[city,setCity]=useState(0)
+    const[town,setTown]=useState(0)
+    function check(e){
+        //console.log(typeof(e.target.value))
+        setState(e.target.value)
+        setCity(0)
+        setTown(0)
+        const city=document.getElementsByClassName("cities")
+        city[0].selected=true
+        const town=document.getElementsByClassName("town")
+        town[0].selected=true
+    }
+    function checkcity(e){
+        // console.log(e.target.value)
+        setCity(e.target.value)
+        setTown(0)
+        const town=document.getElementsByClassName("town")
+        town[0].selected=true
+    }
+    function checktown(e){
+        setTown(e.target.value)
+    }
+    return(
+        <div id="main">
+            <select id="state" onChange={check}>
+            {states.map((v,i)=>(
+                <option key={i} value={i} >{v.name}</option>
+            ))}
             </select>
-			<label>Cities:</label>
-			<select id="city"  onChange={checkcity}>
-			<option value="0" className="cities"  selected>{states[0].city[0].name}</option>
-                <option value="1" className="cities" >{states[0].city[1].name}</option>
-				<option value="2" className="cities" >{states[0].city[2].name}</option>
-			</select>
-			<label >town:</label>
-			<select id="landmark"  onChange={checktown}>
-			<option value="0" className="towns"  selected>{states[0].city[0].landmarks[0].name}</option>
-                <option value="1" className="towns" >{states[0].city[0].landmarks[1].name}</option></select>
+            <select id="city" onChange={checkcity}>
+                {states[state].city.map((v,i)=>(
+                <option  key={i} value={i} className="cities">{v.name}</option>
+                ))}
+            </select>
+            <select id="landmark" onChange={checktown}>
+                {states[state].city[city].landmarks.map((v,i)=>(
+                <option  key={i} value={i} className="town">{v.name}</option>
+                ))}
+            </select>
             <div style={{ marginTop: 50,fontSize:30,fontWeight:'20px' }} id="state-title">State</div>
-                <div  id="state-name">{states[0].name}</div>
-                <div id="state-description">{states[0].description}</div>
+                <div  id="state-name">{states[state].name}</div>
+                <div id="state-description">{states[state].description}</div>
                 <div style={{ marginTop: 50,fontSize:30,fontWeight:'20px'}} id="city-title">City</div>
-                <div  id="city-name">{states[0].city[0].name}</div>
-                <div id="city-description">{states[0].city[0].description}</div>
+                <div  id="city-name">{states[state].city[city].name}</div>
+                <div id="city-description">{states[state].city[city].description}</div>
                 <div style={{ marginTop: 50,fontSize:30,fontWeight:'20px' }} id="landmark-title">Town</div>
-                <div  id="landmark-name">{states[0].city[0].landmarks[0].name}</div>
-                <div id="landmark-description">{states[0].city[0].landmarks[0].description}</div>
-	</div>
-	);
+                <div  id="landmark-name">{states[state].city[city].landmarks[town].name}</div>
+                <div id="landmark-description">{states[state].city[city].landmarks[town].description}</div>
+        </div>
+    )
 }
-
-
-export default App;
