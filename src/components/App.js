@@ -145,17 +145,17 @@ export default function App(){
         setState(e.target.value)
         setCity(0)
         setTown(0)
-        const city=document.getElementsByClassName("cities")
-        city[0].selected=true
-        const town=document.getElementsByClassName("town")
-        town[0].selected=true
+//         const city=document.getElementsByClassName("cities")
+//         city[0].selected=true
+//         const town=document.getElementsByClassName("town")
+//         town[0].selected=true
     }
     function checkcity(e){
         // console.log(e.target.value)
         setCity(e.target.value)
         setTown(0)
-        const town=document.getElementsByClassName("town")
-        town[0].selected=true
+//         const town=document.getElementsByClassName("town")
+//         town[0].selected=true
     }
     function checktown(e){
         setTown(e.target.value)
