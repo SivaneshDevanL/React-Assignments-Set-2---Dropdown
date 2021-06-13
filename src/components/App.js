@@ -177,13 +177,13 @@ export default function App(){
                 <option  key={i} value={i} className="town">{v.name}</option>
                 ))}
             </select>
-            <div style={{ marginTop: 50,fontSize:30,fontWeight:'20px' }} id="state-title">State</div>
+            <div style={{ marginTop: 50,fontSize:30,fontWeight:'20px' }} id="state-title">{states[state].name}</div>
                 <div  id="state-name">{states[state].name}</div>
                 <div id="state-description">{states[state].description}</div>
-                <div style={{ marginTop: 50,fontSize:30,fontWeight:'20px'}} id="city-title">City</div>
+                <div style={{ marginTop: 50,fontSize:30,fontWeight:'20px'}} id="city-title">{states[state].city[city].name}</div>
                 <div  id="city-name">{states[state].city[city].name}</div>
                 <div id="city-description">{states[state].city[city].description}</div>
-                <div style={{ marginTop: 50,fontSize:30,fontWeight:'20px' }} id="landmark-title">Town</div>
+                <div style={{ marginTop: 50,fontSize:30,fontWeight:'20px' }} id="landmark-title">{states[state].city[city].landmarks[town].name}</div>
                 <div  id="landmark-name">{states[state].city[city].landmarks[town].name}</div>
                 <div id="landmark-description">{states[state].city[city].landmarks[town].description}</div>
         </div>
